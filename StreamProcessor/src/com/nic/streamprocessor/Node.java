@@ -2,14 +2,19 @@ package com.nic.streamprocessor;
 
 import java.util.HashMap;
 
-public class Node extends Source implements PipeTarget
+public abstract class Node extends Source implements PipeTarget
 {
-	protected String[] expectedInputs = {};
+	private String[] expectedInputs = {};
 	protected HashMap<String, Float> inputValues;
 	
 	public Node()
 	{
 		inputValues = new HashMap<String, Float>();
+	}
+	
+	protected void setExpectedInputs(String[] ei)
+	{
+		expectedInputs = ei;
 	}
 
 	public boolean setInput(String channel, float value)
@@ -18,7 +23,10 @@ public class Node extends Source implements PipeTarget
 		{
 			inputValues.put(channel, value);
 			if(checkHasAllExpectedInputs())
+			{
 				processStep();
+				inputValues.clear();
+			}
 			return true;
 		}
 		else
@@ -53,14 +61,8 @@ public class Node extends Source implements PipeTarget
 		return false;
 	}
 	
-	protected void processStep()
-	{
-		
-	}
+	protected abstract void processStep();
 	
-	protected boolean processDrain()
-	{
-		return true;
-	}
+	protected abstract boolean processDrain();
 	
 }

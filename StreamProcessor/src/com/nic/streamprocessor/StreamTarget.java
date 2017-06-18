@@ -10,6 +10,7 @@ public class StreamTarget implements PipeTarget
 	public StreamTarget(String[] ei)
 	{
 		expectedInputs = ei;
+		inputValues = new HashMap<String, Float>();
 	}
 	
 	public boolean setInput(String channel, float value)
@@ -18,7 +19,10 @@ public class StreamTarget implements PipeTarget
 		{
 			inputValues.put(channel, value);
 			if(checkHasAllExpectedInputs())
+			{
 				processStep();
+				inputValues.clear();
+			}
 			return true;
 		}
 		else
@@ -52,7 +56,7 @@ public class StreamTarget implements PipeTarget
 		{
 			String key = expectedInputs[i];
 			if(i > 0)
-				System.out.print(",");
+				System.out.print("\t");
 			System.out.print(inputValues.get(key));
 		}
 		System.out.println();
