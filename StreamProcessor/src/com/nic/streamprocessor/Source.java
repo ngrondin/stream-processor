@@ -31,18 +31,26 @@ public class Source
 		outputValues.put(channel, value);
 	}
 	
+	public float getOutput(String channel)
+	{
+		return outputValues.get(channel);
+	}
+	
 	protected void pushOutputs()
 	{
 		Iterator<String> channelIterator = outputValues.keySet().iterator();
 		while(channelIterator.hasNext())
 		{
 			String channel = channelIterator.next();
-			Iterator<Pipe> pipeIterator = outputPipes.get(channel).iterator();
-			while(pipeIterator.hasNext())
+			if(outputPipes.containsKey(channel))
 			{
-				Pipe pipe = pipeIterator.next();
-				pipe.push(outputValues.get(channel));
-			}			
+				Iterator<Pipe> pipeIterator = outputPipes.get(channel).iterator();
+				while(pipeIterator.hasNext())
+				{
+					Pipe pipe = pipeIterator.next();
+					pipe.push(outputValues.get(channel));
+				}			
+			}
 		}
 	}
 	

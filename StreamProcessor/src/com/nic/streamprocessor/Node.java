@@ -61,6 +61,11 @@ public abstract class Node extends Source implements PipeTarget
 		return false;
 	}
 	
+	protected float getInput(String channel)
+	{
+		return inputValues.get(channel);
+	}
+	
 	protected abstract void processStep();
 	
 	protected abstract boolean processDrain();
