@@ -6,17 +6,29 @@ public abstract class Node extends Source implements PipeTarget
 {
 	private String[] expectedInputs = {};
 	protected HashMap<String, Float> inputValues;
+	protected HashMap<String, String> parameters;
 	
 	public Node()
 	{
 		inputValues = new HashMap<String, Float>();
+		parameters = new HashMap<String, String>();
 	}
 	
-	protected void setExpectedInputs(String[] ei)
+	public void setExpectedInputs(String[] ei)
 	{
 		expectedInputs = ei;
 	}
-
+	
+	public void setParameter(String p, String v)
+	{
+		parameters.put(p, v);
+	}
+	
+	protected String getParameter(String p)
+	{
+		return parameters.get(p);
+	}
+	
 	public boolean setInput(String channel, float value)
 	{
 		if(!inputValues.containsKey(channel))
