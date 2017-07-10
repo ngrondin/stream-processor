@@ -39,7 +39,10 @@ public class SeriesVisualiserFrame extends JFrame
 		contentPane.add(scrollBar, BorderLayout.SOUTH);
 	}
 
-
+	public void setActiveChannelMask(long m)
+	{
+		contentPane.setActiveChannelMask(m);
+	}
 
 	
 

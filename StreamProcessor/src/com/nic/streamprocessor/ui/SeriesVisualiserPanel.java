@@ -54,7 +54,8 @@ public class SeriesVisualiserPanel extends JPanel implements MouseWheelListener,
 		clickEvents = new ArrayList<ClickEvent>();
 		addMouseWheelListener(this);
 		addMouseListener(this);
-		setTarget(t);
+		if(t != null)
+			setTarget(t);
 	}
 	
 	public void setTarget(MemoryStreamTarget t)
@@ -74,6 +75,11 @@ public class SeriesVisualiserPanel extends JPanel implements MouseWheelListener,
 		if(height == 0)
 			height = 400;
 		yScale = ((float)height / 2f) / maxAbsY;
+	}
+	
+	public void setActiveChannelMask(long m)
+	{
+		activeChannelMask = m;
 	}
 	
 	public void xZoom(int xz)
